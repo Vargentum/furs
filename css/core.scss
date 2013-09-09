@@ -27,7 +27,7 @@
  Plugins styles import
 ===============================================================*/
 @import "camera"; //slider styles
-
+@import "custom-select"; //selectbox
 /*===============================================================
  Box model: BORDER-BOX
 ===============================================================*/
@@ -48,9 +48,9 @@
 /*===============================================================
  VARIABLES
 ===============================================================*/
-$baseMinWidth           : 320px;
-$baseMaxWidth           : 980px;
-$footerHeight           : 170px;
+$baseMinWidth                       : 320px;
+$baseMaxWidth                       : 980px;
+$footerHeight                       : 170px;
 // Assign colours to variable roles
 $baseFontColor                      : #605c59;
 $textColor                          : #939291;
@@ -112,6 +112,13 @@ $experimental-support-for-svg       : true;
   @extend .jLine;
   &>*{vertical-align: top;}
 }
+.l-flexbox{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
 //State
 .is-hidden {
   display: none;
@@ -159,6 +166,7 @@ $experimental-support-for-svg       : true;
   margin-left:auto;
   margin-right: auto;
 }
+
 /*===============================================================
  MIXINS FOR RESPONSIVE DESIGN
 ===============================================================*/
@@ -246,6 +254,13 @@ $experimental-support-for-svg       : true;
   top:50%;
   margin-top: -$height /2;
   margin-left: -$width /2;
+}
+//vendorize
+@mixin vendorize($prop, $val){
+  -webkit-#{$prop}: $val;
+  -moz-#{$prop}: $val;
+  -ms-#{$prop}: $val;
+  #{$prop}: $val;
 }
 /*===============================================================
  SETTING UP FORMS
@@ -341,7 +356,10 @@ a{
   &:focus {outline: thin dotted;}
   &:active,&:hover {outline: none;}
   text-decoration: underline;
-  &:hover,&:focus{text-decoration: none;}
+  &:hover,&:focus{
+    text-decoration: none;
+    outline: none;
+  }
 }
 @include sticky-footer($footerHeight, ".h-stickyFooter_helper-1", ".h-stickyFooter_helper-2", ".b-page__footer");
 .b-typography{
@@ -385,7 +403,7 @@ DEVELOPER STYLES RUN BELOW THIS POINT
 /*OBJECTS and HELPERS-------------------------------*/
 .obj-{}
 .obj-button{
-  @include single-transition(.4s);
+  @include single-transition($duration:.4s);
   font: bold 22px/1 $attentionFamily;
   text-transform: uppercase;
   color: #fff;
@@ -447,8 +465,8 @@ body {
   height: 115px;
   width: 530px;
   background: inline-image('logo.jpg') no-repeat;
-  color: #939191;
   font: italic 14px/1.2 "Times New Roman";
+  @include singleLink($textColor);
   text-decoration:none;
   @include media-query-max-width(980px){
     width: 420px;
@@ -523,7 +541,7 @@ body {
 
 .b-userNav{
   float: right;
-  margin-top: 32px;
+  height: 53px;
   @include media-query-max-width(980px){}
   @include media-query-max-width(880px){
     float: left;
@@ -533,7 +551,16 @@ body {
   @include media-query-max-width(830px){
     margin-top: 12px;
   }
-
+  .flexboxlegacy &{
+    @extend .l-flexbox;
+    @include vendorize(align-items, flex-end);
+  }
+  .no-flexbox &{
+    height: auto;
+  }
+  @include respond-to(ie10){
+    height: auto;
+  }
 }
 .b-userNav__link{
   text-decoration: none;
@@ -541,6 +568,7 @@ body {
   @include singleLink($titleColor);
   font: bold 14px $attentionFamily;
   @include inline-block;
+  vertical-align: bottom;
   margin-left: 25px;
   &:first-child{margin-left: 0;}
   &:hover,&:focus{
@@ -551,6 +579,22 @@ body {
   @extend .b-userNav__link;
   @include singleLink($linkColor);
   text-decoration: underline;
+}
+.b-userNav__link--userLogged{
+  @extend .b-userNav__link--enterSite;
+  position: relative;
+  padding-left: 18px;
+  padding-bottom: 15px;
+  background: inline-image('icon-user-logged.png') no-repeat;
+  &:after{
+    content: 'личный кабинет';
+    @extend .pseudo-block;
+    bottom: 0;
+    text-transform: uppercase;
+    color: $textColor;
+    font-size: 9px;
+    display: block;
+  }
 }
 .b-userNav__link--shopCart{
   @extend .b-userNav__link;
@@ -716,9 +760,13 @@ input.b-search__field{
 }
 .b-crumbs__link{
   font-size: 12px;
+  line-height: 1;
   @include singleLink($textColor);
   margin-right: 15px;
   position: relative;
+  text-decoration: none;
+  border-bottom: 1px solid $textColor;
+  &:hover,&:focus{border-bottom: none;}
   &:after{
     @extend .pseudo-block;
     top:0;
@@ -888,7 +936,7 @@ input.b-search__field{
     width: 48px;
     height: 31px;
     right: 4px;
-    bottom: 4px;
+    top:190px;
   }
 }
 .b-catalog__unit{
@@ -919,7 +967,6 @@ input.b-search__field{
   }
 }
 .b-catalog__unit__image{
-  position: relative;
   width: 225px;
   height: 225px;
   display: table-cell;
@@ -1020,7 +1067,7 @@ input.b-search__field{
 }
 
 .b-counter{
-  width: 80px;
+  width: 90px;
   @extend .hLine;
   @include placeholder-color($titleColor);
   font-size: 16px;
@@ -1228,7 +1275,9 @@ input.b-search__field{
 }
 
 //FF special
-@-moz-document url-prefix() {}
+@-moz-document url-prefix() {
+
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 /* Safari and Chrome */
