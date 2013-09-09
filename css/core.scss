@@ -22,12 +22,14 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
 //SPRITING
 @import "social_icons/*.png";
-
+//Responsive GRID
+@import "susy";
 /*===============================================================
  Plugins styles import
 ===============================================================*/
 @import "camera"; //slider styles
 @import "custom-select"; //selectbox
+
 /*===============================================================
  Box model: BORDER-BOX
 ===============================================================*/
@@ -77,6 +79,11 @@ $decorationType                     : dotted !default;
 $text-weight                        : normal !default;
 //allow IE9 to render gradient backgrounds
 $experimental-support-for-svg       : true;
+//Responsive GRID params
+$total-columns  : 12;             // a 12-column grid
+$column-width   : 4em;            // each column is 4em wide
+$gutter-width   : 1em;            // 1em gutters between columns
+$grid-padding   : $gutter-width;  // grid-padding equal to gutters
 /*===============================================================
  HELPER CLASSES
 ===============================================================*/
@@ -441,6 +448,7 @@ body {
   @media only screen and (max-width: 1030px) {
     &:before,&:after{display: none;}
   }
+  //@include susy-grid-background;
 }
 .b-page__header{
   position: relative;
@@ -448,109 +456,62 @@ body {
 }
 .b-page__header__top{
   @include pie-clearfix;
-  @include media-query-max-width(980px){
-    padding-left:  1.52284263959391%; /* 15px, 985px   */
-    padding-right: 3.55329949238579%; /* 35px, 985px   */
-  }
 }
 .b-page__footer{
   @extend .b-page;
+  @include media-query-max-width(580px){
+    height: auto;
+  }
 }
 
 /*LAYOUT COMPONENTS-------------------------------*/
 .b-logo{
-  float: left;
   position: relative;
   display: block;
-  height: 115px;
-  width: 530px;
-  background: inline-image('logo.jpg') no-repeat;
-  font: italic 14px/1.2 "Times New Roman";
   @include singleLink($textColor);
+  font: italic 14px/1.2 "Times New Roman";
   text-decoration:none;
-  @include media-query-max-width(980px){
-    width: 420px;
-    margin-bottom: 20px;
+  img{max-width: 100%;}
+  @include span-columns(6, 12);
+  @include media-query-max-width(480px){
+    @include span-columns(12,12);
+    text-align: center;
   }
-  @include media-query-max-width(880px){
-    width: 100%;
-    margin-bottom: 0;
-  }
-  @include media-query-max-width(840px){
-    background-image: inline-image('logo-small.jpg');
-    height: 87px;
-  }
-  @include media-query-max-width(750px){
-    padding-left: 275px;
+}
+.b-logo__description{
+  display: block;
+  white-space: nowrap;
+  @include media-query-max-width(480px){
+    white-space: normal;
+    text-align: center;
+    margin-top: 5px;
   }
 }
 .b-logo__title--text{
   @extend .text-hide;
   position:absolute;
-}                 
-.b-logo__description{
-  position: absolute;
-  right: 0;
-  bottom: 17px;
-  width: 165px;
-  @include media-query-max-width(980px){
-    left: 0;
-    top:100%;
-    width: auto;
-  }
-  @include media-query-max-width(880px){
-    left: auto;
-    top: auto;
-    right: 0;
-  }
-  @include media-query-max-width(840px){
-    bottom: 13px;
-  }
-  @include media-query-max-width(750px){
-    position: relative;
-    bottom: auto;
-    display: table-cell;
-    height: inherit;
-    vertical-align: bottom;
-    padding-bottom: 13px;
-  }
-  @include media-query-max-width(540px){
-    position: absolute;
-    display: block;
-    height: auto;
-    top:100%;
-    margin-top: 50px;
-  }
 }
 
 .b-phone{
   display: block;
-  float: right;
+  text-align: right;
   color: #afafaf;
   font: bold 24px $titleFamily;
   margin-top: 20px;
-  @include media-query-max-width(880px){
-    position: absolute;
-    top: 0;
-    right: 3.55329949238579%; /* 35px, 985px   */
-  }
-  @include media-query-max-width(750px){
-    font-size: 16px;
+  @include span-columns(6 omega,12);
+  @include media-query-max-width(480px){
+    display: block;
+    width: 100%;
+    float: none;
+    clear: both;
+    text-align: center;
+    margin-top: 5px;
   }
 }
 
 .b-userNav{
   float: right;
-  height: 53px;
-  @include media-query-max-width(980px){}
-  @include media-query-max-width(880px){
-    float: left;
-    margin-top: 12px;
-    margin-left: 15px;
-  }
-  @include media-query-max-width(830px){
-    margin-top: 12px;
-  }
+  height: 51px;
   .flexboxlegacy &{
     @extend .l-flexbox;
     @include vendorize(align-items, flex-end);
@@ -560,6 +521,18 @@ body {
   }
   @include respond-to(ie10){
     height: auto;
+  }
+  @include media-query-max-width(810px){
+    float: left;
+  }
+  @include media-query-max-width(480px){
+    width: 100%;
+    .flexboxlegacy &{
+      @include vendorize(justify-content, space-between);
+    }
+    .no-flexbox &{
+      @extend .jLine;
+    }
   }
 }
 .b-userNav__link{
@@ -573,6 +546,9 @@ body {
   &:first-child{margin-left: 0;}
   &:hover,&:focus{
     text-decoration: underline;
+  }
+  @include media-query-max-width(480px){
+    margin-left: 0;
   }
 }
 .b-userNav__link--enterSite{
@@ -711,7 +687,12 @@ body {
   color: $textColor;
 }
 
-.b-serviceNav{}
+.b-serviceNav{
+  @include media-query-max-width(750px){
+    position: relative;
+    top:8px;
+  }
+}
 .b-serviceNav__link{
   font-size: 12px;
   @include singleLink($textColor);
@@ -726,6 +707,10 @@ body {
   }
   &:last-child{
     margin-right: 0;
+    &:after{display: none;}
+  }
+  @include media-query-max-width(750px){
+    display: block;
     &:after{display: none;}
   }
 }
@@ -1261,7 +1246,6 @@ input.b-search__field{
 .b-template--product__counter__value{
   @extend .b-counter__indicator;
 }
-.b-template--product__{}
 
 .b-user__alsoViwedProducts{
   margin: 30px 0;
