@@ -126,6 +126,13 @@ $grid-padding   : $gutter-width;  // grid-padding equal to gutters
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
+@mixin l-flexbox{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;
+}
 //State
 .is-hidden {
   display: none;
@@ -465,6 +472,7 @@ body {
 }
 
 /*LAYOUT COMPONENTS-------------------------------*/
+//LOGO
 .b-logo{
   position: relative;
   display: block;
@@ -509,6 +517,7 @@ body {
   }
 }
 
+//USER NAV
 .b-userNav{
   float: right;
   height: 51px;
@@ -592,11 +601,22 @@ body {
   }
 }
 
+//PAGE NAVIGATION
 .b-page__nav{
+  position: relative;
   clear: both;
   background-color: #9b0a23;
   margin: 10px 0;
   @include pie-clearfix;
+  &:before{
+    @extend .pseudo-block;
+    left: 100%;
+    top:0;
+    height: 100%;
+    width: 10px;
+    background-color: #9b0a23;
+    display: none;
+  }
   &>ul{ float: left; }
   &>ul>li{
     @include inline-block;
@@ -604,6 +624,31 @@ body {
     position: relative;
     margin-left: -4px;
     &:first-child{ margin-left: 0; }
+  }
+  @include media-query-max-width(940px){
+    &>ul{
+      float: none;
+      width: 100%;
+      @include l-flexbox;
+      @include vendorize(justify-content, space-around);
+    }
+  }
+  @include media-query-max-width(680px){
+    @include span-columns(4, 12);
+    padding: 30px 0;
+    &:before{
+      display: block;
+    }
+    &>ul{
+      @include vendorize(flex-direction, column);
+      &>li{margin-left: 0;}
+    }
+    br{display: none;}
+  }
+  @include media-query-max-width(450px){
+    @include span-columns(12,12);
+    margin: 20px 0 0;
+    height: auto !important;
   }
 }
 .b-page__nav__link{
@@ -613,14 +658,25 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   padding: 15px;
-  border-left: 1px solid #9b0a23; /* disable text-jumping, when real border enabled */
-  border-top: 1px solid #9b0a23;
   &.m-active{ @include singleLink(#ffcf00); }
+  li &.m-hasExpandedContent{
+    border-left: 1px solid #9b0a23;
+    border-top: 1px solid #9b0a23;
+  }
   li:hover &.m-hasExpandedContent{
     background-color: #fff;
     border-left-color: #dbdbdb;
     border-top-color: #dbdbdb;
     @include singleLink($titleColor);
+  }
+  @include media-query-max-width(680px){
+    padding: 5px 15px 5px 30px;
+  }
+  @include media-query-max-width(585px){
+    padding-left: 15px;
+  }
+  @include media-query-max-width(450px){
+    padding-left: 20%;
   }
 }
 .b-page__nav__link--deliveryAndPayment{
@@ -633,6 +689,29 @@ body {
   font-size: 13px;
   border: 1px solid #fd9b9b;
   text-decoration: none;
+  text-align: center;
+  line-height: 1.2;
+  @include media-query-max-width(940px){
+    position: absolute;
+    bottom:100%;
+    right: 0;
+    margin-bottom: 11px;
+    border-color: $linkColor;
+    @include singleLink($linkColor);
+  }
+  @include media-query-max-width(680px){
+    position: static;
+    float: none;
+    margin-left: 30px;
+    border-color: #fd9b9b;
+    @include singleLink(#fd9b9b);
+  }
+  @include media-query-max-width(585px){
+    margin-left: 15px;
+  }
+  @include media-query-max-width(450px){
+    margin-left: 20%;
+  }
 }
 .b-page__nav__expandedList{
   position: absolute;
@@ -671,7 +750,6 @@ body {
   //position: relative;
   //@extend .pageWidth;
 }
-
 .b-siteStatus{
   display: block;
   color: $textColor;
@@ -681,12 +759,10 @@ body {
   border-bottom: 1px solid #e3e3e3;
   margin-bottom: 13px;
 }
-
 .b-copy{
   font-size: 12px;
   color: $textColor;
 }
-
 .b-serviceNav{
   @include media-query-max-width(750px){
     position: relative;
@@ -714,7 +790,6 @@ body {
     &:after{display: none;}
   }
 }
-
 .b-search{
   margin-top: 25px;
   display: inline-block;
@@ -739,7 +814,6 @@ input.b-search__field{
   margin-top: -7px;
   right: 6px;
 }
-
 .b-crumbs{
   @extend .hLine;
 }
@@ -768,6 +842,15 @@ input.b-search__field{
   background-color: #ece9e4;
   padding: 15px 20px;
   margin-top: -10px;
+  @include media-query-max-width(680px){
+    @include span-columns(8 omega, 12);
+    margin: 10px 0;
+  }
+  @include media-query-max-width(450px){
+    @include span-columns(12,12);
+    margin: 0 0 20px;
+    height: auto !important;
+  }
 }
 .b-page__mainContent__title{
   margin-top: 10px;
@@ -1018,6 +1101,10 @@ input.b-search__field{
       width: 175px;
       padding-left:  30px;
       padding-right: 30px;
+      @include media-query-max-width(530px){
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
   }
 }
@@ -1026,6 +1113,7 @@ input.b-search__field{
   border: 1px solid #e6e6e6;
   display: table-cell;
   vertical-align: middle;
+  min-width: 115px;
   width: 115px;
   height: 115px;
   img{ max-width: 100%; }
@@ -1086,12 +1174,18 @@ input.b-search__field{
   font-family: $attentionFamily;
   color: $titleColor;
   text-transform: uppercase;
+  @include media-query-max-width(680px){
+    padding: 20px 0;
+  }
 }
 .b-shopcart__amount__price{
   text-transform: none;
   font-size: 30px;
   font-weight: bold;
   margin: 0 20px;
+  @include media-query-max-width(680px){
+    margin: 0;
+  }
 }
 .b-shopcart__amount__button{
   @extend .obj-button;
