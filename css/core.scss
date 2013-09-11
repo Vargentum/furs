@@ -52,7 +52,7 @@
 ===============================================================*/
 $baseMinWidth                       : 320px;
 $baseMaxWidth                       : 980px;
-$footerHeight                       : 170px;
+$footerHeight                       : 190px;
 // Assign colours to variable roles
 $baseFontColor                      : #605c59;
 $textColor                          : #939291;
@@ -455,10 +455,11 @@ body {
   @media only screen and (max-width: 1030px) {
     &:before,&:after{display: none;}
   }
-  //@include susy-grid-background;
+  @include susy-grid-background;
 }
 .b-page__header{
   position: relative;
+
   //@extend .pageWidth;
 }
 .b-page__header__top{
@@ -466,6 +467,7 @@ body {
 }
 .b-page__footer{
   @extend .b-page;
+  padding-top: 20px;
   @include media-query-max-width(580px){
     height: auto;
   }
@@ -649,6 +651,14 @@ body {
     @include span-columns(12,12);
     margin: 20px 0 0;
     height: auto !important;
+    &:before{display: none;}
+  }
+}
+.b-page__nav--mainPage{
+  @extend .b-page__nav;
+  margin: 10px 0 0;
+  @include media-query-max-width(680px){
+    @include span-columns(12 omega, 12);
   }
 }
 .b-page__nav__link{
@@ -842,6 +852,7 @@ input.b-search__field{
   background-color: #ece9e4;
   padding: 15px 20px;
   margin-top: -10px;
+  @include pie-clearfix;
   @include media-query-max-width(680px){
     @include span-columns(8 omega, 12);
     margin: 10px 0;
@@ -849,6 +860,7 @@ input.b-search__field{
   @include media-query-max-width(450px){
     @include span-columns(12,12);
     margin: 0 0 20px;
+    padding-left: 30px;
     height: auto !important;
   }
 }
@@ -866,7 +878,6 @@ input.b-search__field{
 /*ENTER page -------------------*/
 .b-user__form--enter {
   margin-top: 10px;
-  position: relative;
   @include pie-clearfix;
 }
 .b-user__form--enter__label {
@@ -875,6 +886,11 @@ input.b-search__field{
   color: $titleColor;
   @include placeholder-color($titleColor);
   margin-right: 15px;
+  margin-bottom: 10px;
+  @include media-query-max-width(480px){
+    display: block;
+    margin-right: 0;
+  }
 }
 .b-user__form--enter__label__text {
   display: block;
@@ -882,6 +898,9 @@ input.b-search__field{
 }
 .b-user__form--enter__input {
   width: 235px;
+  @include media-query-max-width(480px){
+    width: 100%;
+  }
 }
 .b-user__form--enter__passRecoveryLink {
   position: absolute;
@@ -892,9 +911,13 @@ input.b-search__field{
 }
 
 .b-social{
-  .b-user__form--enter &{
-    width: 255px;
-    float: right;
+  float: right;
+  width: 255px;
+  margin-left: 15px;
+  @include media-query-max-width(680px){
+    float: none;
+    display: block;
+    margin: 10px 0;
   }
 }
 .b-social__header{
@@ -936,11 +959,19 @@ input.b-search__field{
   @extend .b-user__form--registration__label;
   @include inline-block;
   margin-right: 35px;
+  @include media-query-max-width(480px){
+    display: block;
+    margin-right: 0;
+  }
 }
 .b-user__form--registration__label__text{
   font-size: 14px;
   color: $titleColor;
   width: 120px;
+  @include media-query-max-width(480px){
+    display: block;
+    width: 100%;
+  }
 }
 .b-user__form--registration__label__text--required{
   @extend .b-user__form--registration__label__text;
@@ -951,6 +982,9 @@ input.b-search__field{
 }
 .b-user__form--registration__input{
   width: 235px;
+  @include media-query-max-width(480px){
+    width: 100%;
+  }
 }
 
 /*Catalog -------------------*/
@@ -1200,8 +1234,14 @@ input.b-search__field{
   text-transform: uppercase;
   font: 50px/1 $titleFamily;
   color: #fff;
+  @include media-query-max-width(600px){
+    font-size: 40px;
+  }
+  @include media-query-max-width(500px){
+    padding-top: 20px;
+    font-size: 30px !important;
+  }
 }
-
 /*PRODUCT page -------------------*/
 .b-template--product{
   @extend .b-template--catalog__main;
