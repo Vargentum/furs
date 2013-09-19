@@ -464,12 +464,18 @@ body {
 }
 .b-page__header__top{
   @include pie-clearfix;
+  @include media-query-max-width(980px){
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 .b-page__footer{
   @extend .b-page;
-  padding-top: 20px;
-  @include media-query-max-width(580px){
+  padding: 20px 20px 0;
+  @include media-query-max-width(650px){
     height: auto;
+    padding-left: 4%;
+    padding-right: 4%;
   }
 }
 
@@ -515,7 +521,7 @@ body {
     float: none;
     clear: both;
     text-align: center;
-    margin-top: 5px;
+    padding-top: 15px;
   }
 }
 
@@ -533,7 +539,7 @@ body {
   @include respond-to(ie10){
     height: auto;
   }
-  @include media-query-max-width(810px){
+  @include media-query-max-width(835px){
     float: left;
   }
   @include media-query-max-width(480px){

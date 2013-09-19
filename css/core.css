@@ -430,9 +430,10 @@ body { height: 100%; font-size: 15px; line-height: 1.4; background: #e9e9e9 url(
 
 .b-page__header__top { *zoom: 1; }
 .b-page__header__top:after { content: ""; display: table; clear: both; }
+@media only screen and (max-width: 980px) { .b-page__header__top { padding-left: 10px; padding-right: 10px; } }
 
-.b-page__footer { padding-top: 20px; }
-@media only screen and (max-width: 580px) { .b-page__footer { height: auto; } }
+.b-page__footer { padding: 20px 20px 0; }
+@media only screen and (max-width: 650px) { .b-page__footer { height: auto; padding-left: 4%; padding-right: 4%; } }
 
 /*LAYOUT COMPONENTS-------------------------------*/
 .b-logo { position: relative; display: block; color: #939291; font: italic 14px/1.2 "Times New Roman"; text-decoration: none; width: 49.1525424%; float: left; margin-right: 1.6949153%; display: inline; }
@@ -449,13 +450,13 @@ body { height: 100%; font-size: 15px; line-height: 1.4; background: #e9e9e9 url(
 .b-logo__title--text { position: absolute; }
 
 .b-phone { display: block; text-align: right; color: #afafaf; font: bold 24px museo_sans_cyrillic; margin-top: 20px; width: 49.1525424%; float: right; margin-right: 0; *margin-left: -1em; display: inline; }
-@media only screen and (max-width: 480px) { .b-phone { display: block; width: 100%; float: none; clear: both; text-align: center; margin-top: 5px; } }
+@media only screen and (max-width: 480px) { .b-phone { display: block; width: 100%; float: none; clear: both; text-align: center; padding-top: 15px; } }
 
 .b-userNav { float: right; height: 51px; }
 .flexboxlegacy .b-userNav { -webkit-align-items: flex-end; -moz-align-items: flex-end; -ms-align-items: flex-end; align-items: flex-end; }
 .no-flexbox .b-userNav { height: auto; }
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { .b-userNav { height: auto; } }
-@media only screen and (max-width: 810px) { .b-userNav { float: left; } }
+@media only screen and (max-width: 835px) { .b-userNav { float: left; } }
 @media only screen and (max-width: 480px) { .b-userNav { width: 100%; }
   .flexboxlegacy .b-userNav { -webkit-justify-content: space-between; -moz-justify-content: space-between; -ms-justify-content: space-between; justify-content: space-between; } }
 
