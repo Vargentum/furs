@@ -1,0 +1,74 @@
+.b-template--userProfile__exitBtn{
+  text-transform: uppercase;
+  @include singleLink(#fff);
+  text-decoration: none;
+  padding: 3px 15px;
+  background-color: #5f5f5f;
+  @include border-radius;
+  font: bold 18px $attentionFamily;
+}
+
+.b-template--userProfile{}
+.b-template--userProfile__purchaseHistory{
+  border-bottom: 1px solid #e6e6e6;
+}
+.b-template--userProfile__purchaseHistory__header{
+  padding: 25px 55px;
+  text-transform: uppercase;
+  font: 22px $titleFamily;
+  color: $titleColor;
+}
+.b-template--userProfile__purchaseHistory__unit{
+  margin-bottom: 20px;
+}
+.b-template--userProfile__purchaseHistory__unit__header{
+  background-color: #e6e6e6;
+  padding: 8px 20px 5px 55px;
+  @extend .jLine;
+}
+.b-template--userProfile__purchaseHistory__unit__title{
+  font-size: 22px;
+  color: $titleColor;
+}
+.b-template--userProfile__purchaseHistory__unit__cancelBtn{
+  text-transform: uppercase;
+  @include singleLink(#fff);
+  text-decoration: none;
+  padding: 3px 15px;
+  background-color: #e0003c;
+  @include border-radius;
+  font: bold 18px $attentionFamily;
+}
+.b-template--userProfile__purchaseHistory__unit__info{
+  @extend .dl-inline;
+  padding: 25px 20px 25px 55px;
+  dt{
+    color: #e0003c;
+    text-transform: uppercase;
+    margin-right: 15px;
+    margin-bottom: 10px;
+  }
+  dd{
+    color: $titleColor;
+    font: 22px $attentionFamily;
+    position: relative;
+    top:-6px;
+    margin-bottom: 10px;
+  }
+}
+.b-template--userProfile__purchaseHistory__unit__info--amount{
+  @extend .dl-inline;
+  padding: 5px 20px 5px 55px;
+  dt{
+    text-transform: uppercase;
+    font: 16px $titleFamily;
+    color: $titleColor;
+    margin-right: 15px;
+  }
+  dd{
+    font: bold 30px $attentionFamily;
+    color: $titleColor;
+    position: relative;
+    top:-16px;
+  }
+}

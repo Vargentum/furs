@@ -276,6 +276,11 @@ $grid-padding   : $gutter-width;  // grid-padding equal to gutters
   -ms-#{$prop}: $val;
   #{$prop}: $val;
 }
+
+
+@import "user_profile";
+
+
 /*===============================================================
  SETTING UP FORMS
 ===============================================================*/
@@ -856,6 +861,7 @@ input.b-search__field{
 }
 .b-crumbs{
   @extend .hLine;
+  margin-bottom: 10px;
 }
 .b-crumbs__link{
   font-size: 12px;
@@ -895,7 +901,6 @@ input.b-search__field{
   }
 }
 .b-page__mainContent__title{
-  margin-top: 10px;
   font: 30px $titleFamily;
   color: $titleColor;
   text-transform: uppercase;
