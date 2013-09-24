@@ -579,6 +579,7 @@ body {
   padding-left: 18px;
   padding-bottom: 15px;
   background: inline-image('icon-user-logged.png') no-repeat;
+  min-width: 100px;
   &:after{
     content: 'личный кабинет';
     @extend .pseudo-block;

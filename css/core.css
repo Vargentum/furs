@@ -475,7 +475,7 @@ body { height: 100%; font-size: 15px; line-height: 1.4; background: #e9e9e9 url(
 .b-userNav__link--enterSite:hover, .b-userNav__link--userLogged:hover { color: #c10012; }
 .b-userNav__link--enterSite:active, .b-userNav__link--userLogged:active { color: #c10012; }
 
-.b-userNav__link--userLogged { position: relative; padding-left: 18px; padding-bottom: 15px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAmUlEQVQYV3XOoQ6CYBSG4XfDaXNegMGgiWY1eQVyByYTt6A0xtjMBovB5jRZHcFkdASzmzM7GqMcgoL/gfF+8TnhQJHFnCMX1oyo5SO/vRhq6vMpUQg0TgwSzhqnCiONNqmBO40tbgY6VJqVdKVdxQ5L3mREjDV0cYk54bEi5M7+f+DwUL8KQsqWHgxIavTdBhYNJDzh0IiSA29OaP5M56L6AAAAAElFTkSuQmCC') no-repeat; }
+.b-userNav__link--userLogged { position: relative; padding-left: 18px; padding-bottom: 15px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAQAAAC1QeVaAAAAmUlEQVQYV3XOoQ6CYBSG4XfDaXNegMGgiWY1eQVyByYTt6A0xtjMBovB5jRZHcFkdASzmzM7GqMcgoL/gfF+8TnhQJHFnCMX1oyo5SO/vRhq6vMpUQg0TgwSzhqnCiONNqmBO40tbgY6VJqVdKVdxQ5L3mREjDV0cYk54bEi5M7+f+DwUL8KQsqWHgxIavTdBhYNJDzh0IiSA29OaP5M56L6AAAAAElFTkSuQmCC') no-repeat; min-width: 100px; }
 .b-userNav__link--userLogged:after { content: 'личный кабинет'; bottom: 0; text-transform: uppercase; color: #939291; font-size: 9px; display: block; }
 
 .b-userNav__link--shopCart { padding-left: 25px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAOCAYAAADNGCeJAAAAQElEQVQ4y2Pw9fX9j4wZqAVoZiA5GKeB6GxcNDqbYtcR5V1SaKqFHX1dRqzrSEomlMiTrJCqyYJggiU2PGhqGABCgb+/AD9MCwAAAABJRU5ErkJggg==') 0 50% no-repeat; }
